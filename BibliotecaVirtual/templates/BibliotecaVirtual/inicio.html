@@ -1,0 +1,26 @@
+{% extends "BibliotecaVirtual/padre.html" %}
+{% load static %}
+{% block contenidoQueCambia %}
+
+    <h1>Menú de búsqueda de libros por código</h1>
+
+    <form action="buscar" method="GET">
+        <input type="number" name="codigo" id="codigo">        
+        <input type="submit" value="Buscar">
+    </form>
+
+    {% if libros %}
+    <p>Estamos buscando el libro cuyo código es: {{codigo}}</p>
+
+    <ul>
+    {% for libro in libros %}
+        <li>Libro: {{libro.nombre}} / Autor: {{libro.autor}} / Código: {{libro.codigo}}</li>
+        <p></p>
+    {% endfor %}
+    </ul>
+
+    {% endif %}
+
+    <p style="color:red;">{{respuesta}}</p>
+    
+{% endblock %}
