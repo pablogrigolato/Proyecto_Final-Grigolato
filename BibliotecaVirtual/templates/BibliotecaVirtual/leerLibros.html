@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libros</title>
+</head>
+<body>
+    {% for l in libros %}
+        <li>{{l}}</li>
+        <button>
+            <a href="{%url 'EliminarLibro' l.nombre %}">Eliminar</a>
+            <a href="{%url 'EditarLibro' l.nombre %}">Editar</a>
+        </button>
+    {% endfor %}
+    <br>
+    <a href="libros">Agregar otro Libro</a>
+</body>
+</html>
