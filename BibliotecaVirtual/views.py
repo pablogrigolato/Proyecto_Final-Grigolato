@@ -6,6 +6,8 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login,logout, authenticate
 
 # Create your views here.
 
@@ -264,3 +266,22 @@ class LibroDelete(DeleteView):
 #    model = Docente
 #    template_name = "BibliotecaVirtual/docente_confirm_delete.html"
 #    success_url = "/BibliotecaVirtual/docente/list"
+
+
+def login_request(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data =request.POST)
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            contras = form.cleaned_data.get('password')
+
+            user = authenticate(username=usuario, password=contras)
+            if user is not None:
+                login(request, user)
+                return render(request,"BibliotecaVirtual/inicio.html", {"mensaje":f"Bienvenido {usuario}."})
+            else:
+                return render(request,"BibliotecaVirtual/inicio.html", {"mensaje":"Error por datos incorrectos."})
+        else:
+            return render(request, "BibliotecaVirtual/inicio.html", {"mensaje":"Error por formulario erróneo."})
+    form = AuthenticationForm()
+    return render(request,"BibliotecaVirtual/login.html", {"form":form})

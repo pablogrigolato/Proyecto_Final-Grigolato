@@ -11,7 +11,7 @@ urlpatterns = [
     #path('alumnoFormulario', views.alumnoFormulario, name="AlumnoFormulario"),
     #path('docenteFormulario', views.docenteFormulario, name="DocenteFormulario"),
     path('busquedaLibro', views.busquedaLibro, name="BusquedaLibro"),
-    path('buscar', views.buscar),
+    path('buscar/', views.buscar),
     path('leerDocentes', views.leerDocentes, name='LeerDocentes'),
     path('leerAlumnos', views.leerAlumnos, name='LeerAlumnos'),
     path('leerLibros', views.leerLibros, name='LeerLibros'),
@@ -28,4 +28,6 @@ urlpatterns = [
     path('editar/<int:pk>', views.LibroUpdate.as_view(), name='Edit'),
     #path(r'^editar/(?P<pk>\d+)$', views.LibroUpdate.as_view(), name='Edit'),
     path('borrar/<int:pk>', views.LibroDelete.as_view(), name='Delete'),
+
+    path('login', views.login_request, name='Login'),
 ]
