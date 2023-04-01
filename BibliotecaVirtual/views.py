@@ -1,18 +1,22 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from BibliotecaVirtual.models import Libro, Alumno, Docente
-from BibliotecaVirtual.forms import LibroFormulario, AlumnoFormulario, DocenteFormulario
+from BibliotecaVirtual.models import Libro, Alumno, Docente, Avatar
+from BibliotecaVirtual.forms import LibroFormulario, AlumnoFormulario, DocenteFormulario, AvatarFormulario
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login,logout, authenticate
+from BibliotecaVirtual.forms import UserRegisterForm, UserEditForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import make_password
+#from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
-def inicio(request):
-    return render(request, "BibliotecaVirtual/inicio.html")
+#def inicio(request):
+#    return render(request, "BibliotecaVirtual/inicio.html")
 
 #def libro(request):
 #    return render(request, "BibliotecaVirtual/libros.html")
@@ -285,3 +289,59 @@ def login_request(request):
             return render(request, "BibliotecaVirtual/inicio.html", {"mensaje":"Error por formulario erróneo."})
     form = AuthenticationForm()
     return render(request,"BibliotecaVirtual/login.html", {"form":form})
+
+def register(request):
+    if request.method == 'POST':
+        #form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            form.save()
+            return render(request, 'BibliotecaVirtual/inicio.html', {'mensaje':'Usuario creado :)'})
+    else:
+        #form = UserCreationForm()
+        form = UserRegisterForm()
+    return render(request, 'BibliotecaVirtual/registro.html', {'form':form})
+
+@login_required
+def inicio(request):
+    avatares = Avatar.objects.filter(user=request.user.id)
+    print(avatares[0].imagen.url)
+    return render(render, 'BibliotecaVirtual/inicio.html', {'url':avatares[0].imagen.url})
+
+#class CLaseQueNecesitaLogin(LoginRequiredMixin)
+
+@login_required
+def editarPerfil(request):
+    usuario = request.user
+    if request.method == 'POST':
+        miFormulario = UserEditForm(request.POST)
+        print(miFormulario)
+        if miFormulario.is_valid():
+            informacion = miFormulario.cleaned_data
+            print(miFormulario)
+            usuario.email = informacion['email']
+            usuario.first_name = informacion['first_name']
+            usuario.last_name = informacion['last_name']
+            if informacion['password1'] == informacion['password2']:
+                usuario.password = make_password(informacion['password1'])
+                usuario.save()
+            else:
+                return render(request, 'BibliotecaVirtual/inicio.html', {'mensaje':'Contraseña incorrecta.'})
+            return render(request, 'BibliotecaVirtual/inicio.html')
+    else:
+        miFormulario = UserEditForm(initial={'email':usuario.email})
+    return render(request, "BibliotecaVirtual/editarPerfil.html", {"miFormulario":miFormulario, "usuario":usuario})
+
+@login_required
+def agregarAvatar(request):
+    if request.method == 'POST':
+        miFormulario = AvatarFormulario(request.POST, request.FILES)
+        if miFormulario.is_valid():
+            u = User.objects.get(username=request.user)
+            avatar = Avatar(user=u, imagen=miFormulario.cleaned_data['imagen'])
+            avatar.save()
+            return render(request, 'BibliotecaVirtual/inicio.html')
+    else:
+        miFormulario = AvatarFormulario()
+    return render(request, "BibliotecaVirtual/agregarAvatar.html", {"miFormulario":miFormulario})

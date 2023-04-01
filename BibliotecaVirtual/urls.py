@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from BibliotecaVirtual import views
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', views.inicio, name="Inicio"),
@@ -30,4 +31,8 @@ urlpatterns = [
     path('borrar/<int:pk>', views.LibroDelete.as_view(), name='Delete'),
 
     path('login', views.login_request, name='Login'),
+    path('register', views.register, name='Registro'),
+    path('logout', LogoutView.as_view(template_name='BibliotecaVirtual/logout.html'), name='Logout'),
+    path('editarPerfil', views.editarPerfil, name='EditarPerfil'),
+    path('agregarAvatar', views.agregarAvatar, name='AgregarAvatar'),
 ]

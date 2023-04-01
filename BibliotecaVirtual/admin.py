@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(Libro)
 admin.site.register(Alumno)
 admin.site.register(Docente)
+admin.site.register(Avatar)

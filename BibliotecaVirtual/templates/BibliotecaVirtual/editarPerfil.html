@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BibliotecaVirtual - Login</title>
+    <title>BibliotecaVirtual - Editar perfil</title>
 </head>
 <body>
     {% extends "BibliotecaVirtual/padre.html" %}
     {% load static %}
     {% block contenidoQueCambia %}
         <!--Aquí va lo que cambia, y lo asociado a esta vista :) -->
-        <form action="" method="POST">
-            {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit">Iniciar sesión</button>
+        <h1>Formulario - Editar Perfil</h1>
+        <h2>De {{usuario}}</h2>
+        <form action="" method="POST">{% csrf_token %}
+            <!--Acá está la magia de Django-->
+            <table>
+                {{ miFormulario.as_table }}
+            </table>
+            <input type="submit", value="Enviar">     
         </form>
     {% endblock %}
-
 </body>
 </html>

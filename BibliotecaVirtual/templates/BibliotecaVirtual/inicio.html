@@ -1,6 +1,10 @@
 {% extends "BibliotecaVirtual/padre.html" %}
 {% load static %}
 {% block contenidoQueCambia %}
+    <div class="text-center">
+        <img height="40px" src="{{ Avatar.imagen.url }}">
+        <h3>Hola {{user.username}}</h3>
+    </div>
 
     <h1>Menú de búsqueda de libros por código</h1>
 
