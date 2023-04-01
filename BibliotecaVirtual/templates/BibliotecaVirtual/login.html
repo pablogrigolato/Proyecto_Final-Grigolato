@@ -7,16 +7,13 @@
     <title>BibliotecaVirtual - Login</title>
 </head>
 <body>
-    {% extends "BibliotecaVirtual/padre.html" %}
-    {% load static %}
-    {% block contenidoQueCambia %}
+
         <!--Aquí va lo que cambia, y lo asociado a esta vista :) -->
         <form action="" method="POST">
             {% csrf_token %}
             {{form.as_p}}
             <button type="submit">Iniciar sesión</button>
         </form>
-    {% endblock %}
 
 </body>
 </html>
