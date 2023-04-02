@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libro Detalle</title>
-</head>
-<body>
-    
+{% extends "BibliotecaVirtual/padre.html" %}
+{% load static %}
+{% block contenidoQueCambia %}
+
     <p>Nombre del Libro: <i>{{ libro.nombre }}</i></p>
     <p>Autor: <i>{{ libro.autor }}</i></p>
     <p>Codigo: <i>{{ libro.codigo }}</i></p>
     <p>
         <a href="{% url 'List' %}">Regresar</a>
     </p>
-
-</body>
-</html>
+    
+{% endblock %}
