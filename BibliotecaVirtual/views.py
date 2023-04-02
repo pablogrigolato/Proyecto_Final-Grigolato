@@ -11,6 +11,7 @@ from django.contrib.auth import login,logout, authenticate
 from BibliotecaVirtual.forms import UserRegisterForm, UserEditForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User
 #from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
