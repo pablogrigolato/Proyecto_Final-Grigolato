@@ -1,5 +1,9 @@
 # Proyecto Final del curso de Python @ Coderhouse /GRIGOLATO Pablo Alejandro
 
+Para ver los tests realizados abrir el archivo "Casos de prueba.xlsx".
+
+Videos demo de funcionamiento del sitio cargados en la raíz de este directorio como "Demo1.mkv" y "Demo2.mkv".
+
 Instrucciones para la instalación:
 1. Clonar el repositorio en la carpeta local deseada a través de Git Bash.
 2. Acceder a la carpeta del proyecto en cuestión a través de la terminal de VSC con el siguiente comando: cd ...\Tercera-pre-entrega-Grigolato
@@ -57,14 +61,3 @@ BibliotecaVirtual/editarPerfil - Vista para la edición de algún campo de cada 
 BibliotecaVirtual/agregarAvatar - Vista para agregar un Avatar al usuario.
 
 About/ - Segunda aplicación con vista del inicio sin accesos a herramientas disponibles únicamente para personas con usuarios, con descripción breve de la BibliotecaVirtual.
-
-
-
-
-
-Test realizados
-Para ver los tests realizados abrir el archivo "Casos de prueba.xlsx"
-
-
-Video demo de funcionamiento del sitio
-https://drive.google.com/file
