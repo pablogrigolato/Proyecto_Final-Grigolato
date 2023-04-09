@@ -4,6 +4,11 @@
 
     {% for l in libros %}
         <li>{{l}}</li>
+
+        {%if l.tapa%}
+        <img src="{{l.tapa.url}}" alt="imagen">        
+        {%endif%}     
+
         <button>
             <a href="{%url 'EliminarLibro' l.nombre %}">Eliminar</a>
             <a href="{%url 'EditarLibro' l.nombre %}">Editar</a>

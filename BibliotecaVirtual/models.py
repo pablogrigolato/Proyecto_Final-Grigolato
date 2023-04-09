@@ -7,9 +7,10 @@ class Libro(models.Model):
     nombre = models.CharField(max_length=60)
     autor = models.CharField(max_length=40)
     codigo = models.IntegerField()
+    tapa = models.ImageField(upload_to='tapas', null=True, blank=True)
 
     def __str__(self):
-        return f"Nombre: {self.nombre} - Autor: {self.autor} - Codigo: {self.codigo}"
+        return f"Nombre: {self.nombre} - Autor: {self.autor} - Codigo: {self.codigo} - Tapa: {self.tapa}"
 
 class Alumno(models.Model):
     nombre = models.CharField(max_length=40)

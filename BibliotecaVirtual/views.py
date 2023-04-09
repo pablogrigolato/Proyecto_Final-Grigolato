@@ -30,14 +30,15 @@ from django.contrib.auth.models import User
 
 def libro(request):
     if request.method == 'POST': 
-        miFormulario = LibroFormulario(request.POST)
+        miFormulario = LibroFormulario(request.POST, request.FILES)
         print(miFormulario)
 
         if miFormulario.is_valid:
             informacion = miFormulario.cleaned_data
             libro = Libro(nombre=request.POST['nombre'],
                       autor=request.POST['autor'],
-                      codigo=request.POST['codigo']
+                      codigo=request.POST['codigo'],
+                      tapa=informacion['tapa'],
                       )
             libro.save()
             return render(request, "BibliotecaVirtual/inicio.html")

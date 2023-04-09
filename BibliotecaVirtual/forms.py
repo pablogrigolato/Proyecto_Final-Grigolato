@@ -6,6 +6,7 @@ class LibroFormulario(forms.Form):
     nombre = forms.CharField(max_length=60)
     autor = forms.CharField(max_length=40)
     codigo = forms.IntegerField()
+    tapa = forms.ImageField(label='Imagen')
 
 class AlumnoFormulario(forms.Form):
     nombre = forms.CharField(max_length=40)
